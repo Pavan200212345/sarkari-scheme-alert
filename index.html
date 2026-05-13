@@ -4,8 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Career Jobs Portal</title>
+
+<!-- Monetag - Works Now -->
+<script src="https://quge5.com/88/tag.min.js"
+data-zone="238392"
+async
+data-cfasync="false"></script>
+
+<!-- Telegram WebApp -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<!-- AdsGram - Works After Approval -->
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -504,7 +515,8 @@ function filterByType(type, btn) {
 // ── Ad Modal ──
 function openAdModal(pdfUrl) {
   currentPdfUrl = pdfUrl;
-  const isTelegram = tg && tg.initData &&
+  const isTelegram = tg &&
+    tg.initData &&
     tg.initData.length > 0;
 
   if(AdController && isTelegram) {
