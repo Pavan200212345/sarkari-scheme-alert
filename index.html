@@ -149,6 +149,10 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
+.watch-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .cancel-btn {
   margin-top: 10px;
   background: none;
@@ -156,6 +160,7 @@ body {
   color: #999;
   font-size: 13px;
   cursor: pointer;
+  padding: 8px;
 }
 .loading {
   text-align: center;
@@ -172,19 +177,24 @@ body {
 </div>
 
 <div class="search-box">
-  <input type="text" 
-    placeholder="Search jobs, companies..." 
+  <input type="text"
+    placeholder="Search jobs, companies..."
     id="searchInput"
     oninput="filterJobs()"
   />
 </div>
 
 <div class="filter-tabs">
-  <button class="filter-tab active" onclick="filterByType('all', this)">All Jobs</button>
-  <button class="filter-tab" onclick="filterByType('it', this)">IT Jobs</button>
-  <button class="filter-tab" onclick="filterByType('govt', this)">Govt Jobs</button>
-  <button class="filter-tab" onclick="filterByType('fresher', this)">Freshers</button>
-  <button class="filter-tab" onclick="filterByType('placement', this)">Placement</button>
+  <button class="filter-tab active"
+    onclick="filterByType('all', this)">All Jobs</button>
+  <button class="filter-tab"
+    onclick="filterByType('it', this)">IT Jobs</button>
+  <button class="filter-tab"
+    onclick="filterByType('govt', this)">Govt Jobs</button>
+  <button class="filter-tab"
+    onclick="filterByType('fresher', this)">Freshers</button>
+  <button class="filter-tab"
+    onclick="filterByType('placement', this)">Placement</button>
 </div>
 
 <div class="jobs-list" id="jobsList">
@@ -195,35 +205,54 @@ body {
 <div class="ad-modal" id="adModal">
   <div class="ad-box">
     <h3>Unlock Full Guide</h3>
-    <p>Watch a short 5-second video to download the complete Job Guide PDF with Resume Tips & Interview Questions</p>
-    <button class="watch-btn" id="watchBtn" onclick="watchAd()">
+    <p>Watch a short 5-second video to download
+    the complete Job Guide PDF with Resume Tips
+    & Interview Questions</p>
+    <button class="watch-btn"
+      id="watchBtn"
+      onclick="watchAd()">
       Watch & Download (5 sec)
     </button>
-    <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    <button class="cancel-btn"
+      onclick="closeModal()">
+      Cancel
+    </button>
   </div>
 </div>
 
 <script>
-// Telegram WebApp Init
+// ── Telegram WebApp Init ──
 const tg = window.Telegram.WebApp;
 tg.expand();
 tg.ready();
 
-// AdsGram Init
-const AdController = window.Adsgram.init({ 
-  blockId: "30144",
-  debug: false 
+// ── AdsGram Init ──
+let AdController = null;
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    AdController = window.Adsgram.init({
+      blockId: "30144",
+      debug: false
+    });
+    console.log('AdsGram initialized');
+  } catch(e) {
+    console.log('AdsGram init error:', e);
+  }
 });
 
 let currentPdfUrl = '';
 let allJobs = [];
 
-// Load jobs from GitHub
+// ── Load Jobs from GitHub ──
 async function loadJobs() {
   try {
     const response = await fetch(
       'https://api.github.com/repos/pavan200212345/sarkari-scheme-alert/contents/',
-      { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+      {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      }
     );
     const files = await response.json();
     const pdfs = files.filter(f => f.name.endsWith('.pdf'));
@@ -246,26 +275,29 @@ async function loadJobs() {
 
     renderJobs(allJobs);
   } catch(e) {
+    console.log('Load error:', e);
     showDefaultJobs();
   }
 }
 
 function formatTitle(filename) {
-  return filename
+  let name = filename
     .replace('.pdf', '')
     .replace(/_/g, ' ')
-    .replace(/job \d+ \d+/, '')
+    .replace(/job \d+ \d+/gi, '')
     .trim()
-    .toUpperCase() || 'Job Notification 2026';
+    .toUpperCase();
+  return name || 'Job Notification 2026';
 }
 
 function getCompany(filename) {
   const companies = [
-    'TCS', 'Infosys', 'Wipro', 
-    'Accenture', 'SSC', 'Railway', 'IBPS'
+    'TCS', 'Infosys', 'Wipro', 'Accenture',
+    'Cognizant', 'HCL', 'SSC', 'Railway',
+    'IBPS', 'Qualcomm', 'Amazon', 'Google'
   ];
   for(let c of companies) {
-    if(filename.toLowerCase().includes(c.toLowerCase())) 
+    if(filename.toUpperCase().includes(c))
       return c;
   }
   return 'Multiple Companies';
@@ -273,22 +305,26 @@ function getCompany(filename) {
 
 function getSalary(index) {
   const salaries = [
-    '3.5 - 7 LPA', '3.6 LPA', 
+    '3.5 - 7 LPA',
+    '3.6 LPA',
     'Rs.25000 - 35000/month',
-    '4 - 8 LPA', 'Rs.19900 - 35400/month'
+    '4 - 8 LPA',
+    'Rs.19900 - 35400/month'
   ];
   return salaries[index % salaries.length];
 }
 
 function getJobType(filename) {
   const fn = filename.toLowerCase();
-  if(fn.includes('ssc') || 
-     fn.includes('railway') || 
-     fn.includes('ibps') || 
-     fn.includes('govt')) return 'govt';
-  if(fn.includes('tcs') || 
-     fn.includes('infosys') || 
-     fn.includes('wipro') || 
+  if(fn.includes('ssc') ||
+     fn.includes('railway') ||
+     fn.includes('ibps') ||
+     fn.includes('govt') ||
+     fn.includes('sarkari')) return 'govt';
+  if(fn.includes('tcs') ||
+     fn.includes('infosys') ||
+     fn.includes('wipro') ||
+     fn.includes('tech') ||
      fn.includes('it')) return 'it';
   return 'fresher';
 }
@@ -296,7 +332,7 @@ function getJobType(filename) {
 function renderJobs(jobs) {
   const container = document.getElementById('jobsList');
   if(jobs.length === 0) {
-    container.innerHTML = 
+    container.innerHTML =
       '<div class="loading">No jobs found</div>';
     return;
   }
@@ -310,7 +346,7 @@ function renderJobs(jobs) {
         <span class="tag">${job.date}</span>
       </div>
       <div class="salary">Salary: ${job.salary}</div>
-      <button class="download-btn" 
+      <button class="download-btn"
         onclick="openAdModal('${job.url}')">
         Download Full Guide + Apply
       </button>
@@ -349,6 +385,26 @@ function showDefaultJobs() {
       type: 'fresher',
       url: 'https://www.infosys.com/careers',
       date: 'New'
+    },
+    {
+      title: 'Wipro National Qualifier Test 2026',
+      company: 'Wipro',
+      salary: '3.5 LPA',
+      location: 'Multiple Cities',
+      experience: 'Freshers',
+      type: 'fresher',
+      url: 'https://www.wipro.com/careers',
+      date: 'New'
+    },
+    {
+      title: 'Railway RRB NTPC 2026 - 11558 Posts',
+      company: 'Railway',
+      salary: 'Rs.19900 - 35400/month',
+      location: 'PAN India',
+      experience: '12th / Graduate',
+      type: 'govt',
+      url: 'https://www.rrbcdg.gov.in',
+      date: 'New'
     }
   ];
   renderJobs(allJobs);
@@ -375,39 +431,46 @@ function filterByType(type, btn) {
   }
 }
 
+// ── Ad Modal Functions ──
 function openAdModal(pdfUrl) {
   currentPdfUrl = pdfUrl;
-  document.getElementById('adModal').classList.add('show');
+  if(AdController) {
+    document.getElementById('adModal')
+      .classList.add('show');
+  } else {
+    // AdsGram not available open PDF directly
+    window.open(pdfUrl, '_blank');
+  }
 }
 
 function closeModal() {
-  document.getElementById('adModal').classList.remove('show');
+  document.getElementById('adModal')
+    .classList.remove('show');
 }
 
 function watchAd() {
-  document.getElementById('watchBtn').textContent = 
-    'Loading ad...';
-  document.getElementById('watchBtn').disabled = true;
+  const btn = document.getElementById('watchBtn');
+  btn.textContent = 'Loading Ad...';
+  btn.disabled = true;
 
   AdController.show()
-    .then(() => {
-      // Ad watched successfully - open PDF
+    .then((result) => {
+      console.log('Ad watched successfully');
       closeModal();
       window.open(currentPdfUrl, '_blank');
     })
-    .catch(() => {
-      // Ad failed - open PDF anyway
+    .catch((error) => {
+      console.log('Ad error - opening PDF anyway');
       closeModal();
       window.open(currentPdfUrl, '_blank');
     })
     .finally(() => {
-      document.getElementById('watchBtn').textContent = 
-        'Watch & Download (5 sec)';
-      document.getElementById('watchBtn').disabled = false;
+      btn.textContent = 'Watch & Download (5 sec)';
+      btn.disabled = false;
     });
 }
 
-// Load on start
+// ── Start ──
 loadJobs();
 </script>
 </body>
