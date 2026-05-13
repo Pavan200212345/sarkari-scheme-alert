@@ -4,19 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Career Jobs Portal</title>
-
-<!-- Monetag -->
-<script src="https://quge5.com/88/tag.min.js"
-data-zone="238392"
-async
-data-cfasync="false"></script>
-
-<!-- Telegram WebApp -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<!-- AdsGram -->
 <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
-
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -28,31 +17,35 @@ body {
 .header {
   background: linear-gradient(135deg, #003399, #0055cc);
   color: white;
-  padding: 20px;
+  padding: 16px 20px;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 100;
 }
-.header h1 { font-size: 20px; font-weight: 700; }
-.header p { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+.header h1 { font-size: 18px; font-weight: 700; }
+.header p {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 3px;
+}
 .search-box {
-  padding: 12px 15px;
+  padding: 10px 15px;
   background: white;
   border-bottom: 1px solid #eee;
 }
 .search-box input {
   width: 100%;
-  padding: 10px 15px;
+  padding: 9px 15px;
   border: 2px solid #003399;
   border-radius: 25px;
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
 }
 .filter-tabs {
   display: flex;
   gap: 8px;
-  padding: 10px 15px;
+  padding: 8px 15px;
   overflow-x: auto;
   background: white;
   border-bottom: 1px solid #eee;
@@ -60,15 +53,15 @@ body {
 }
 .filter-tabs::-webkit-scrollbar { display: none; }
 .filter-tab {
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 20px;
   border: 1.5px solid #003399;
   color: #003399;
-  font-size: 12px;
+  font-size: 11px;
   white-space: nowrap;
   cursor: pointer;
   background: white;
-  font-weight: 500;
+  font-weight: 600;
 }
 .filter-tab.active {
   background: #003399;
@@ -77,73 +70,86 @@ body {
 .ad-banner {
   width: 100%;
   background: #fff;
-  padding: 8px;
-  text-align: center;
+  padding: 8px 12px;
   border-bottom: 1px solid #eee;
 }
 .ad-banner a {
   display: block;
-  background: #fff3cd;
-  border: 1px solid #ffc107;
+  background: linear-gradient(
+    135deg, #fff3cd, #ffe8a1
+  );
+  border: 1.5px solid #ffc107;
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 12px;
   text-decoration: none;
   color: #856404;
   font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
 }
-.ad-banner a:active {
-  opacity: 0.8;
-}
-.jobs-list { padding: 15px; }
+.ad-banner a:active { opacity: 0.8; }
+.jobs-list { padding: 12px; }
 .job-card {
   background: white;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   border-left: 4px solid #003399;
-  transition: transform 0.2s;
 }
-.job-card:active { transform: scale(0.98); }
-.job-card .company {
-  font-size: 11px;
+.job-card:active { opacity: 0.95; }
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.company-name {
+  font-size: 12px;
   color: #003399;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.job-card .title {
-  font-size: 15px;
+.badge-new {
+  background: #ff4444;
+  color: white;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 9px;
   font-weight: 700;
-  margin: 5px 0;
+}
+.job-title {
+  font-size: 14px;
+  font-weight: 700;
   color: #1a1a2e;
   line-height: 1.3;
+  margin: 4px 0 6px;
 }
-.job-card .meta {
+.job-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin: 8px 0;
+  gap: 5px;
+  margin-bottom: 6px;
 }
-.job-card .tag {
+.tag {
   background: #f0f4ff;
   color: #003399;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
 }
-.job-card .salary {
+.salary {
   color: #008000;
   font-weight: 700;
-  font-size: 13px;
-  margin: 4px 0;
+  font-size: 12px;
+  margin-bottom: 8px;
 }
 .download-btn {
   width: 100%;
-  padding: 11px;
+  padding: 10px;
   background: linear-gradient(135deg, #003399, #0055cc);
   color: white;
   border: none;
@@ -151,8 +157,6 @@ body {
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
-  letter-spacing: 0.3px;
 }
 .download-btn:active { opacity: 0.85; }
 .ad-modal {
@@ -164,93 +168,73 @@ body {
   z-index: 1000;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 .ad-modal.show { display: flex; }
 .ad-box {
   background: white;
   border-radius: 20px;
-  padding: 32px 24px;
+  padding: 28px 22px;
   text-align: center;
   width: 88%;
-  max-width: 360px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  max-width: 340px;
 }
-.ad-box .ad-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
-}
+.ad-icon { font-size: 36px; margin-bottom: 10px; }
 .ad-box h3 {
   color: #003399;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 8px;
   font-weight: 700;
 }
 .ad-box p {
   color: #666;
-  font-size: 13px;
-  margin-bottom: 24px;
+  font-size: 12px;
+  margin-bottom: 20px;
   line-height: 1.5;
 }
 .watch-btn {
   width: 100%;
-  padding: 15px;
+  padding: 13px;
   background: linear-gradient(135deg, #003399, #0055cc);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  letter-spacing: 0.3px;
 }
-.watch-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+.watch-btn:disabled { opacity: 0.6; }
 .cancel-btn {
-  margin-top: 12px;
+  margin-top: 10px;
   background: none;
   border: none;
   color: #aaa;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
-  padding: 8px 20px;
+  padding: 8px;
   width: 100%;
 }
 .loading {
   text-align: center;
-  padding: 50px 20px;
+  padding: 40px 20px;
   color: #888;
-  font-size: 14px;
+  font-size: 13px;
 }
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f0f4ff;
-  border-top: 4px solid #003399;
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid #f0f4ff;
+  border-top: 3px solid #003399;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-.badge-new {
-  background: #ff4444;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 10px;
-  font-weight: 700;
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>Career Jobs Portal</h1>
-  <p>Latest Govt & IT Jobs | Placement Guides | Study Material</p>
+  <p>Govt & IT Jobs | Placement Guides | Study Material</p>
 </div>
 
 <div class="search-box">
@@ -263,40 +247,30 @@ body {
 
 <div class="filter-tabs">
   <button class="filter-tab active"
-    onclick="filterByType('all', this)">
-    All Jobs
-  </button>
+    onclick="filterByType('all',this)">All Jobs</button>
   <button class="filter-tab"
-    onclick="filterByType('it', this)">
-    IT Jobs
-  </button>
+    onclick="filterByType('it',this)">IT Jobs</button>
   <button class="filter-tab"
-    onclick="filterByType('govt', this)">
-    Govt Jobs
-  </button>
+    onclick="filterByType('govt',this)">Govt Jobs</button>
   <button class="filter-tab"
-    onclick="filterByType('fresher', this)">
-    Freshers
-  </button>
+    onclick="filterByType('fresher',this)">Freshers</button>
   <button class="filter-tab"
-    onclick="filterByType('placement', this)">
-    Placement
-  </button>
+    onclick="filterByType('placement',this)">Placement</button>
 </div>
 
-<!-- Adsterra Banner - EARN NOW ✅ -->
+<!-- Adsterra Banner -->
 <div class="ad-banner">
   <a href="https://www.profitablecpmratenetwork.com/epf1h2nk?key=ca7914ca665a338eae3a958326e74b78"
     target="_blank">
-    🔥 FREE: Download Latest Placement
-    Study Material & Interview Questions
+    🔥 FREE Download: Placement Study Material,
+    Interview Questions & Resume Templates
     → Click Here ←
   </a>
 </div>
 
 <div class="jobs-list" id="jobsList">
   <div class="loading">
-    <div class="loading-spinner"></div>
+    <div class="spinner"></div>
     Loading latest jobs...
   </div>
 </div>
@@ -307,31 +281,24 @@ body {
     <div class="ad-icon">🎬</div>
     <h3>Unlock Full Guide</h3>
     <p>Watch a short 5-second video to download
-    the complete Job Guide PDF with Resume Tips,
-    Interview Questions & Apply Link!</p>
+    the complete Job Guide PDF!</p>
     <button class="watch-btn"
-      id="watchBtn"
-      onclick="watchAd()">
+      id="watchBtn" onclick="watchAd()">
       ▶ Watch & Download (5 sec)
     </button>
     <button class="cancel-btn"
-      onclick="closeModal()">
-      Cancel
-    </button>
+      onclick="closeModal()">Cancel</button>
   </div>
 </div>
 
 <script>
-// ── Telegram WebApp Init ──
-const tg = window.Telegram && window.Telegram.WebApp
-  ? window.Telegram.WebApp
-  : null;
-if(tg) {
-  tg.expand();
-  tg.ready();
-}
+// Telegram Init
+const tg = window.Telegram &&
+  window.Telegram.WebApp
+  ? window.Telegram.WebApp : null;
+if(tg) { tg.expand(); tg.ready(); }
 
-// ── AdsGram Init ──
+// AdsGram Init
 let AdController = null;
 window.addEventListener('load', function() {
   try {
@@ -343,24 +310,21 @@ window.addEventListener('load', function() {
       console.log('AdsGram ready');
     }
   } catch(e) {
-    console.log('AdsGram init error:', e);
+    console.log('AdsGram error:', e);
   }
 });
 
 let currentPdfUrl = '';
 let allJobs = [];
 
-// ── Load Jobs ──
 async function loadJobs() {
   try {
     const res = await fetch(
       'https://api.github.com/repos/' +
       'pavan200212345/sarkari-scheme-alert/contents/',
-      {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      }
+      { headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }}
     );
     const files = await res.json();
     const pdfs = files.filter(f =>
@@ -368,8 +332,7 @@ async function loadJobs() {
     );
 
     if(pdfs.length === 0) {
-      showDefaultJobs();
-      return;
+      showDefaultJobs(); return;
     }
 
     allJobs = pdfs.map((pdf, i) => ({
@@ -380,81 +343,75 @@ async function loadJobs() {
       experience: 'Freshers / 0-3 years',
       type: getJobType(pdf.name),
       url: pdf.download_url,
-      date: 'New'
     }));
 
     renderJobs(allJobs);
   } catch(e) {
-    console.log('Load error:', e);
     showDefaultJobs();
   }
 }
 
 function formatTitle(filename) {
-  let name = filename
-    .replace('.pdf', '')
-    .replace(/_/g, ' ')
-    .replace(/job \d+ \d+/gi, '')
-    .trim()
-    .toUpperCase();
-  return name || 'Job Notification 2026';
+  return filename
+    .replace('.pdf','')
+    .replace(/_/g,' ')
+    .replace(/job \d+ \d+/gi,'')
+    .trim().toUpperCase() || 'Job Notification 2026';
 }
 
 function getCompany(filename) {
-  const companies = [
-    'TCS', 'INFOSYS', 'WIPRO', 'ACCENTURE',
-    'COGNIZANT', 'HCL', 'SSC', 'RAILWAY',
-    'IBPS', 'QUALCOMM', 'AMAZON', 'GOOGLE',
-    'MICROSOFT', 'DELOITTE', 'CAPGEMINI'
+  const cos = [
+    'TCS','INFOSYS','WIPRO','ACCENTURE',
+    'COGNIZANT','HCL','SSC','RAILWAY',
+    'IBPS','QUALCOMM','AMAZON','GOOGLE',
+    'MICROSOFT','DELOITTE','CAPGEMINI',
+    'ORACLE','SAMSUNG','INTEL'
   ];
   const fn = filename.toUpperCase();
-  for(let c of companies) {
+  for(let c of cos) {
     if(fn.includes(c)) return c;
   }
   return 'Multiple Companies';
 }
 
-function getSalary(index) {
-  const salaries = [
+function getSalary(i) {
+  return [
     '3.5 - 7 LPA',
     '3.6 LPA',
-    'Rs.25,000 - 35,000/month',
+    'Rs.25,000 - 35,000/mo',
     '4 - 8 LPA',
-    'Rs.19,900 - 35,400/month'
-  ];
-  return salaries[index % salaries.length];
+    'Rs.19,900 - 35,400/mo'
+  ][i % 5];
 }
 
 function getJobType(filename) {
   const fn = filename.toLowerCase();
-  if(fn.includes('ssc') || fn.includes('railway') ||
-     fn.includes('ibps') || fn.includes('govt') ||
-     fn.includes('sarkari') || fn.includes('rrb'))
+  if(fn.includes('ssc')||fn.includes('railway')||
+     fn.includes('ibps')||fn.includes('rrb')||
+     fn.includes('govt')||fn.includes('sarkari'))
     return 'govt';
-  if(fn.includes('tcs') || fn.includes('infosys') ||
-     fn.includes('wipro') || fn.includes('tech') ||
-     fn.includes('it') || fn.includes('software'))
+  if(fn.includes('tcs')||fn.includes('infosys')||
+     fn.includes('wipro')||fn.includes('tech')||
+     fn.includes('software')||fn.includes('it'))
     return 'it';
   return 'fresher';
 }
 
 function renderJobs(jobs) {
-  const container = document.getElementById('jobsList');
-  if(jobs.length === 0) {
-    container.innerHTML =
+  const c = document.getElementById('jobsList');
+  if(!jobs.length) {
+    c.innerHTML =
       '<div class="loading">No jobs found</div>';
     return;
   }
-  container.innerHTML = jobs.map(job => `
+  c.innerHTML = jobs.map(job => `
     <div class="job-card" data-type="${job.type}">
-      <div style="display:flex;
-        justify-content:space-between;
-        align-items:center;">
-        <div class="company">${job.company}</div>
+      <div class="card-top">
+        <div class="company-name">${job.company}</div>
         <span class="badge-new">NEW</span>
       </div>
-      <div class="title">${job.title}</div>
-      <div class="meta">
+      <div class="job-title">${job.title}</div>
+      <div class="job-meta">
         <span class="tag">${job.experience}</span>
         <span class="tag">${job.location}</span>
       </div>
@@ -469,89 +426,64 @@ function renderJobs(jobs) {
 
 function showDefaultJobs() {
   allJobs = [
-    {
-      title: 'TCS Off Campus Hiring 2026',
-      company: 'TCS',
-      salary: '3.5 - 7 LPA',
-      location: 'PAN India',
-      experience: 'Freshers / 0-2 years',
-      type: 'it',
-      url: 'https://www.tcs.com/careers',
-      date: 'New'
-    },
-    {
-      title: 'SSC CGL 2026 - 17000 Posts',
-      company: 'SSC',
-      salary: 'Rs.25,000 - 1,51,100/month',
-      location: 'PAN India',
-      experience: 'Any Graduate',
-      type: 'govt',
-      url: 'https://ssc.nic.in',
-      date: 'New'
-    },
-    {
-      title: 'Infosys System Engineer 2026',
-      company: 'INFOSYS',
-      salary: '3.6 LPA',
-      location: 'Bangalore / Pune',
-      experience: 'Freshers',
-      type: 'fresher',
-      url: 'https://www.infosys.com/careers',
-      date: 'New'
-    },
-    {
-      title: 'Wipro NQT 2026 - National Qualifier',
-      company: 'WIPRO',
-      salary: '3.5 LPA',
-      location: 'Multiple Cities',
-      experience: 'Freshers',
-      type: 'fresher',
-      url: 'https://www.wipro.com/careers',
-      date: 'New'
-    },
-    {
-      title: 'Railway RRB NTPC 2026 - 11558 Posts',
-      company: 'RAILWAY',
-      salary: 'Rs.19,900 - 35,400/month',
-      location: 'PAN India',
-      experience: '12th / Graduate',
-      type: 'govt',
-      url: 'https://www.rrbcdg.gov.in',
-      date: 'New'
-    }
+    { title:'TCS Off Campus 2026',
+      company:'TCS', salary:'3.5-7 LPA',
+      location:'PAN India',
+      experience:'Freshers/0-2 yrs',
+      type:'it',
+      url:'https://www.tcs.com/careers' },
+    { title:'SSC CGL 2026 - 17000 Posts',
+      company:'SSC',
+      salary:'Rs.25,000-1,51,100/mo',
+      location:'PAN India',
+      experience:'Any Graduate',
+      type:'govt',
+      url:'https://ssc.nic.in' },
+    { title:'Infosys System Engineer 2026',
+      company:'INFOSYS', salary:'3.6 LPA',
+      location:'Bangalore/Pune',
+      experience:'Freshers',
+      type:'fresher',
+      url:'https://www.infosys.com/careers' },
+    { title:'Wipro NQT 2026',
+      company:'WIPRO', salary:'3.5 LPA',
+      location:'Multiple Cities',
+      experience:'Freshers',
+      type:'fresher',
+      url:'https://www.wipro.com/careers' },
+    { title:'Railway RRB NTPC 2026',
+      company:'RAILWAY',
+      salary:'Rs.19,900-35,400/mo',
+      location:'PAN India',
+      experience:'12th/Graduate',
+      type:'govt',
+      url:'https://www.rrbcdg.gov.in' }
   ];
   renderJobs(allJobs);
 }
 
 function filterJobs() {
-  const query = document.getElementById(
+  const q = document.getElementById(
     'searchInput').value.toLowerCase();
-  const filtered = allJobs.filter(j =>
-    j.title.toLowerCase().includes(query) ||
-    j.company.toLowerCase().includes(query)
-  );
-  renderJobs(filtered);
+  renderJobs(allJobs.filter(j =>
+    j.title.toLowerCase().includes(q) ||
+    j.company.toLowerCase().includes(q)
+  ));
 }
 
 function filterByType(type, btn) {
   document.querySelectorAll('.filter-tab')
     .forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  renderJobs(
-    type === 'all'
-      ? allJobs
-      : allJobs.filter(j => j.type === type)
-  );
+  renderJobs(type==='all' ? allJobs :
+    allJobs.filter(j => j.type===type));
 }
 
-// ── Ad Modal ──
 function openAdModal(pdfUrl) {
   currentPdfUrl = pdfUrl;
-  const isTelegram = tg &&
-    tg.initData &&
+  const isTG = tg && tg.initData &&
     tg.initData.length > 0;
-
-  if(AdController && isTelegram) {
+  if(AdController && isTG) {
     document.getElementById('adModal')
       .classList.add('show');
   } else {
@@ -566,7 +498,7 @@ function closeModal() {
 
 function watchAd() {
   const btn = document.getElementById('watchBtn');
-  btn.textContent = 'Loading Ad...';
+  btn.textContent = 'Loading...';
   btn.disabled = true;
 
   if(!AdController) {
@@ -579,12 +511,10 @@ function watchAd() {
 
   AdController.show()
     .then(() => {
-      console.log('Ad completed');
       closeModal();
       window.open(currentPdfUrl, '_blank');
     })
-    .catch((err) => {
-      console.log('Ad error:', err);
+    .catch(() => {
       closeModal();
       window.open(currentPdfUrl, '_blank');
     })
@@ -594,7 +524,6 @@ function watchAd() {
     });
 }
 
-// ── Start ──
 loadJobs();
 </script>
 </body>
